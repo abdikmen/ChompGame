@@ -17,6 +17,11 @@ public class GamePanel extends javax.swing.JFrame {
     /**
      * Creates new form UserInterface
      */
+    
+    //a counter to determine the winner.
+    int counter;
+    
+    
     public GamePanel() {
         initComponents();
         button_11.setVisible(false);
@@ -40,14 +45,13 @@ public class GamePanel extends javax.swing.JFrame {
         button_35.setVisible(false);
         button_36.setVisible(false);
         button_37.setVisible(false);
-        button_41.setVisible(false);
+        button_poisoned.setVisible(false);
         button_42.setVisible(false);
         button_43.setVisible(false);
         button_44.setVisible(false);
         button_45.setVisible(false);
         button_46.setVisible(false);
         button_47.setVisible(false);
-        jButton10.setVisible(false);
         txt_username1.setText(null);
         txt_username2.setText(null);
     }
@@ -73,9 +77,8 @@ public class GamePanel extends javax.swing.JFrame {
         button_14 = new javax.swing.JButton();
         button_15 = new javax.swing.JButton();
         button_16 = new javax.swing.JButton();
-        button_41 = new javax.swing.JButton();
+        button_poisoned = new javax.swing.JButton();
         button_21 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
         button_23 = new javax.swing.JButton();
         button_24 = new javax.swing.JButton();
         button_25 = new javax.swing.JButton();
@@ -98,15 +101,21 @@ public class GamePanel extends javax.swing.JFrame {
         button_37 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_chomp.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_chomp.setText("CHOMP!");
+        getContentPane().add(txt_chomp, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 43, 181, 67));
 
         jLabel1.setText("Player 1:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 87, 80, 29));
 
         txt_username1.setToolTipText("");
+        getContentPane().add(txt_username1, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 87, 116, 29));
 
         jLabel2.setText("Player 2:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(883, 87, 80, 29));
+        getContentPane().add(txt_username2, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 87, 116, 29));
 
         button_start.setText("Start Game");
         button_start.addActionListener(new java.awt.event.ActionListener() {
@@ -114,12 +123,31 @@ public class GamePanel extends javax.swing.JFrame {
                 button_startActionPerformed(evt);
             }
         });
+        getContentPane().add(button_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 710, 247, 58));
 
         button_11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_11ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_11, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 174, 121, 121));
 
         button_12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_12ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_12, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 174, 121, 121));
 
         button_13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_13ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_13, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 174, 121, 121));
 
         button_14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_14.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +155,7 @@ public class GamePanel extends javax.swing.JFrame {
                 button_14ActionPerformed(evt);
             }
         });
+        getContentPane().add(button_14, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 174, 121, 121));
 
         button_15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_15.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +163,7 @@ public class GamePanel extends javax.swing.JFrame {
                 button_15ActionPerformed(evt);
             }
         });
+        getContentPane().add(button_15, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 174, 121, 121));
 
         button_16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_16.addActionListener(new java.awt.event.ActionListener() {
@@ -141,8 +171,15 @@ public class GamePanel extends javax.swing.JFrame {
                 button_16ActionPerformed(evt);
             }
         });
+        getContentPane().add(button_16, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 174, 121, 121));
 
-        button_41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_poisoned.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece_poisoned.png"))); // NOI18N
+        button_poisoned.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_poisonedActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_poisoned, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 576, 121, 121));
 
         button_21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_21.addActionListener(new java.awt.event.ActionListener() {
@@ -150,28 +187,87 @@ public class GamePanel extends javax.swing.JFrame {
                 button_21ActionPerformed(evt);
             }
         });
-
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        getContentPane().add(button_21, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 308, 121, 121));
 
         button_23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_23ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_23, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 121, 121));
 
         button_24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_24ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_24, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 308, 121, 121));
 
         button_25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_25ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_25, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 308, 121, 121));
 
         button_26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_26ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_26, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 308, 121, 121));
 
         button_32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_32ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_32, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 442, 121, 121));
 
         button_31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_31ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_31, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 442, 121, 121));
 
         button_42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_42.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_42ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_42, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 576, 121, 121));
 
         button_34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_34ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_34, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 442, 121, 121));
 
         button_22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_22ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_22, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 308, 121, 121));
 
         button_35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_35ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_35, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 442, 121, 121));
 
         button_36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_36.addActionListener(new java.awt.event.ActionListener() {
@@ -179,10 +275,23 @@ public class GamePanel extends javax.swing.JFrame {
                 button_36ActionPerformed(evt);
             }
         });
+        getContentPane().add(button_36, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 442, 121, 121));
 
         button_33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_33ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_33, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 442, 121, 121));
 
         button_44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_44.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_44ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_44, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 576, 121, 121));
 
         button_43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_43.addActionListener(new java.awt.event.ActionListener() {
@@ -190,6 +299,7 @@ public class GamePanel extends javax.swing.JFrame {
                 button_43ActionPerformed(evt);
             }
         });
+        getContentPane().add(button_43, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 576, 121, 121));
 
         button_45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_45.addActionListener(new java.awt.event.ActionListener() {
@@ -197,8 +307,15 @@ public class GamePanel extends javax.swing.JFrame {
                 button_45ActionPerformed(evt);
             }
         });
+        getContentPane().add(button_45, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 576, 121, 121));
 
         button_46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_46.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_46ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 576, 121, 121));
 
         button_17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_17.addActionListener(new java.awt.event.ActionListener() {
@@ -206,170 +323,107 @@ public class GamePanel extends javax.swing.JFrame {
                 button_17ActionPerformed(evt);
             }
         });
+        getContentPane().add(button_17, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 174, 121, 121));
 
         button_47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_47.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_47ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_47, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 576, 121, 121));
 
         button_27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_27ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_27, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 308, 121, 121));
 
         button_37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_username1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txt_chomp, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(225, 225, 225)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_username2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(button_41, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7)
-                                .addComponent(button_42, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(button_43, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(button_31, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(button_11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(button_21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(button_32, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(button_22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(button_12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(button_33, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(button_23, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                        .addComponent(button_13, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(button_34, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(button_14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(button_24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(7, 7, 7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button_44, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(7, 7, 7)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(button_45, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button_35, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button_25, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button_15, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(button_36, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(button_16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(button_46, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(button_26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(button_17, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(button_27, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(button_37, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(button_47, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(400, 400, 400)
-                        .addComponent(button_start, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(166, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txt_username2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_username1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(txt_chomp, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(button_11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_15, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_16, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_17, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_23, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_24, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_25, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_21, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_22, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_26, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_27, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button_33, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_34, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_35, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_36, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_31, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_32, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_37, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(button_47, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_46, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_45, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_44, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(button_43, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(button_41, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(button_42, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(button_start, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(236, 236, 236))
-        );
+        button_37.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_37ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_37, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 442, 121, 121));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_15ActionPerformed
         // TODO add your handling code here:
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
     }//GEN-LAST:event_button_15ActionPerformed
 
     private void button_21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_21ActionPerformed
         // TODO add your handling code here:
+        button_24.setVisible(false);
+        button_25.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_14.setVisible(false);
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+        button_23.setVisible(false);
+        button_13.setVisible(false);
+        button_21.setVisible(false);
+        button_11.setVisible(false);
+        button_22.setVisible(false);
+        button_12.setVisible(false);
     }//GEN-LAST:event_button_21ActionPerformed
 
     private void button_14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_14ActionPerformed
         // TODO add your handling code here:
+        button_14.setVisible(false);
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+        
     }//GEN-LAST:event_button_14ActionPerformed
 
     private void button_45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_45ActionPerformed
         // TODO add your handling code here:
+        button_47.setVisible(false);
+        button_37.setVisible(false);
+        button_27.setVisible(false);
+        button_17.setVisible(false);
+        button_46.setVisible(false);
+        button_36.setVisible(false);
+        button_26.setVisible(false);
+        button_16.setVisible(false);
+        button_45.setVisible(false);
+        button_35.setVisible(false);
+        button_25.setVisible(false);
+        button_15.setVisible(false);
     }//GEN-LAST:event_button_45ActionPerformed
 
     private void button_43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_43ActionPerformed
         // TODO add your handling code here:
+        button_47.setVisible(false);
+        button_37.setVisible(false);
+        button_27.setVisible(false);
+        button_17.setVisible(false);
+        button_46.setVisible(false);
+        button_36.setVisible(false);
+        button_26.setVisible(false);
+        button_16.setVisible(false);
+        button_45.setVisible(false);
+        button_35.setVisible(false);
+        button_25.setVisible(false);
+        button_15.setVisible(false);
+        button_44.setVisible(false);
+        button_34.setVisible(false);
+        button_24.setVisible(false);
+        button_14.setVisible(false);
+        button_43.setVisible(false);
+        button_33.setVisible(false);
+        button_23.setVisible(false);
+        button_13.setVisible(false);
     }//GEN-LAST:event_button_43ActionPerformed
 
     private void button_17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_17ActionPerformed
@@ -379,6 +433,12 @@ public class GamePanel extends javax.swing.JFrame {
 
     private void button_36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_36ActionPerformed
         // TODO add your handling code here:
+        button_36.setVisible(false);
+        button_37.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
     }//GEN-LAST:event_button_36ActionPerformed
 
     private void button_16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_16ActionPerformed
@@ -389,18 +449,18 @@ public class GamePanel extends javax.swing.JFrame {
 
     private void button_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_startActionPerformed
         // TODO add your handling code here:
-        if(txt_username1.getText().equalsIgnoreCase(null)){
+        if(txt_username1.getText() == null){
             String message = "Player 1 doesn't exist.";
             JOptionPane.showMessageDialog(null, message, "Dialog",
             JOptionPane.ERROR_MESSAGE);
 
         }
-        else if(txt_username2.getText().equalsIgnoreCase(null)){
+        else if(txt_username2.getText() == null){
             String message = "Player 2 doesn't exist.";
             JOptionPane.showMessageDialog(null, message, "Dialog",
             JOptionPane.ERROR_MESSAGE);
         }
-        else if(txt_username1.getText().equalsIgnoreCase(null) && txt_username2.getText().equalsIgnoreCase(null)){
+        else if(txt_username1.getText() == null && txt_username2.getText() == null){
             String message = "There are no player.";
             JOptionPane.showMessageDialog(null, message, "Dialog",
             JOptionPane.ERROR_MESSAGE);
@@ -427,7 +487,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_35.setVisible(true);
         button_36.setVisible(true);
         button_37.setVisible(true);
-        button_41.setVisible(true);
+        button_poisoned.setVisible(true);
         button_42.setVisible(true);
         button_43.setVisible(true);
         button_44.setVisible(true);
@@ -436,6 +496,279 @@ public class GamePanel extends javax.swing.JFrame {
         button_47.setVisible(true);
         }
     }//GEN-LAST:event_button_startActionPerformed
+
+    private void button_13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_13ActionPerformed
+        // TODO add your handling code here:
+        button_13.setVisible(false);
+        button_14.setVisible(false);
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+    }//GEN-LAST:event_button_13ActionPerformed
+
+    private void button_12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_12ActionPerformed
+        // TODO add your handling code here:
+        button_12.setVisible(false);
+        button_13.setVisible(false);
+        button_14.setVisible(false);
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+    }//GEN-LAST:event_button_12ActionPerformed
+
+    private void button_11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_11ActionPerformed
+        // TODO add your handling code here:
+        button_11.setVisible(false);
+        button_12.setVisible(false);
+        button_13.setVisible(false);
+        button_14.setVisible(false);
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+    }//GEN-LAST:event_button_11ActionPerformed
+
+    private void button_27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_27ActionPerformed
+        // TODO add your handling code here:
+        button_27.setVisible(false);
+        button_17.setVisible(false);
+    }//GEN-LAST:event_button_27ActionPerformed
+
+    private void button_26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_26ActionPerformed
+        // TODO add your handling code here:
+        button_17.setVisible(false);
+        button_27.setVisible(false);
+        button_26.setVisible(false);
+        button_16.setVisible(false);
+        
+    }//GEN-LAST:event_button_26ActionPerformed
+
+    private void button_25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_25ActionPerformed
+        // TODO add your handling code here:
+        button_25.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+    }//GEN-LAST:event_button_25ActionPerformed
+
+    private void button_24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_24ActionPerformed
+        // TODO add your handling code here:
+        button_24.setVisible(false);
+        button_25.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_14.setVisible(false);
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+    }//GEN-LAST:event_button_24ActionPerformed
+
+    private void button_23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_23ActionPerformed
+        // TODO add your handling code here:
+        button_24.setVisible(false);
+        button_25.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_14.setVisible(false);
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+        button_23.setVisible(false);
+        button_13.setVisible(false);
+    }//GEN-LAST:event_button_23ActionPerformed
+
+    private void button_22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_22ActionPerformed
+        // TODO add your handling code here:
+        button_24.setVisible(false);
+        button_25.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_14.setVisible(false);
+        button_15.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+        button_23.setVisible(false);
+        button_13.setVisible(false);
+        button_22.setVisible(false);
+        button_12.setVisible(false);
+    }//GEN-LAST:event_button_22ActionPerformed
+
+    private void button_37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_37ActionPerformed
+        // TODO add your handling code here:
+        button_37.setVisible(false);
+        button_27.setVisible(false);
+        button_17.setVisible(false);
+    }//GEN-LAST:event_button_37ActionPerformed
+
+    private void button_35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_35ActionPerformed
+        // TODO add your handling code here:
+        button_36.setVisible(false);
+        button_37.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+        button_35.setVisible(false);
+        button_25.setVisible(false);
+        button_15.setVisible(false);
+    }//GEN-LAST:event_button_35ActionPerformed
+
+    private void button_34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_34ActionPerformed
+        // TODO add your handling code here:
+        button_36.setVisible(false);
+        button_37.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+        button_35.setVisible(false);
+        button_25.setVisible(false);
+        button_15.setVisible(false);
+        button_34.setVisible(false);
+        button_24.setVisible(false);
+        button_14.setVisible(false);
+    }//GEN-LAST:event_button_34ActionPerformed
+
+    private void button_33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_33ActionPerformed
+        // TODO add your handling code here:
+        button_36.setVisible(false);
+        button_37.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+        button_35.setVisible(false);
+        button_25.setVisible(false);
+        button_15.setVisible(false);
+        button_34.setVisible(false);
+        button_24.setVisible(false);
+        button_14.setVisible(false);
+        button_33.setVisible(false);
+        button_23.setVisible(false);
+        button_13.setVisible(false);
+    }//GEN-LAST:event_button_33ActionPerformed
+
+    private void button_32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_32ActionPerformed
+        // TODO add your handling code here:
+        button_36.setVisible(false);
+        button_37.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+        button_35.setVisible(false);
+        button_25.setVisible(false);
+        button_15.setVisible(false);
+        button_34.setVisible(false);
+        button_24.setVisible(false);
+        button_14.setVisible(false);
+        button_33.setVisible(false);
+        button_23.setVisible(false);
+        button_13.setVisible(false);
+        button_32.setVisible(false);
+        button_22.setVisible(false);
+        button_12.setVisible(false);
+        
+    }//GEN-LAST:event_button_32ActionPerformed
+
+    private void button_31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_31ActionPerformed
+        // TODO add your handling code here:
+        button_36.setVisible(false);
+        button_37.setVisible(false);
+        button_26.setVisible(false);
+        button_27.setVisible(false);
+        button_16.setVisible(false);
+        button_17.setVisible(false);
+        button_35.setVisible(false);
+        button_25.setVisible(false);
+        button_15.setVisible(false);
+        button_34.setVisible(false);
+        button_24.setVisible(false);
+        button_14.setVisible(false);
+        button_33.setVisible(false);
+        button_23.setVisible(false);
+        button_13.setVisible(false);
+        button_32.setVisible(false);
+        button_22.setVisible(false);
+        button_12.setVisible(false);
+        button_31.setVisible(false);
+        button_21.setVisible(false);
+        button_11.setVisible(false);
+    }//GEN-LAST:event_button_31ActionPerformed
+
+    private void button_47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_47ActionPerformed
+        // TODO add your handling code here:
+        button_47.setVisible(false);
+        button_37.setVisible(false);
+        button_27.setVisible(false);
+        button_17.setVisible(false);
+    }//GEN-LAST:event_button_47ActionPerformed
+
+    private void button_46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_46ActionPerformed
+        // TODO add your handling code here:
+        button_47.setVisible(false);
+        button_37.setVisible(false);
+        button_27.setVisible(false);
+        button_17.setVisible(false);
+        button_46.setVisible(false);
+        button_36.setVisible(false);
+        button_26.setVisible(false);
+        button_16.setVisible(false);
+    }//GEN-LAST:event_button_46ActionPerformed
+
+    private void button_44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_44ActionPerformed
+        // TODO add your handling code here:
+        button_47.setVisible(false);
+        button_37.setVisible(false);
+        button_27.setVisible(false);
+        button_17.setVisible(false);
+        button_46.setVisible(false);
+        button_36.setVisible(false);
+        button_26.setVisible(false);
+        button_16.setVisible(false);
+        button_45.setVisible(false);
+        button_35.setVisible(false);
+        button_25.setVisible(false);
+        button_15.setVisible(false);
+        button_44.setVisible(false);
+        button_34.setVisible(false);
+        button_24.setVisible(false);
+        button_14.setVisible(false);
+        
+    }//GEN-LAST:event_button_44ActionPerformed
+
+    private void button_42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_42ActionPerformed
+        // TODO add your handling code here:
+        button_47.setVisible(false);
+        button_37.setVisible(false);
+        button_27.setVisible(false);
+        button_17.setVisible(false);
+        button_46.setVisible(false);
+        button_36.setVisible(false);
+        button_26.setVisible(false);
+        button_16.setVisible(false);
+        button_45.setVisible(false);
+        button_35.setVisible(false);
+        button_25.setVisible(false);
+        button_15.setVisible(false);
+        button_44.setVisible(false);
+        button_34.setVisible(false);
+        button_24.setVisible(false);
+        button_14.setVisible(false);
+        button_42.setVisible(false);
+        button_32.setVisible(false);
+        button_22.setVisible(false);
+        button_12.setVisible(false);
+        button_13.setVisible(false);
+        button_23.setVisible(false);
+        button_33.setVisible(false);
+        button_43.setVisible(false);
+    }//GEN-LAST:event_button_42ActionPerformed
+
+    private void button_poisonedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_poisonedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_poisonedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -495,15 +828,14 @@ public class GamePanel extends javax.swing.JFrame {
     private javax.swing.JButton button_35;
     private javax.swing.JButton button_36;
     private javax.swing.JButton button_37;
-    private javax.swing.JButton button_41;
     private javax.swing.JButton button_42;
     private javax.swing.JButton button_43;
     private javax.swing.JButton button_44;
     private javax.swing.JButton button_45;
     private javax.swing.JButton button_46;
     private javax.swing.JButton button_47;
+    private javax.swing.JButton button_poisoned;
     private javax.swing.JButton button_start;
-    private javax.swing.JButton jButton10;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel txt_chomp;
