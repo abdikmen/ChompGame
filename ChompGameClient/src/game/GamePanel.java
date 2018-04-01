@@ -19,8 +19,11 @@ public class GamePanel extends javax.swing.JFrame {
      */
     
     //a counter to determine the winner.
-    int counter;
+    int counter=2;
     
+    
+    //an integer to understand that the game has started.
+    int game=0;
     
     public GamePanel() {
         initComponents();
@@ -52,9 +55,35 @@ public class GamePanel extends javax.swing.JFrame {
         button_45.setVisible(false);
         button_46.setVisible(false);
         button_47.setVisible(false);
-        txt_username1.setText(null);
-        txt_username2.setText(null);
+        label_turn.setText(null);
+        
     }
+    // a method to determine whose turn it is.
+    public void turn(){
+        counter = counter + 1;
+        if(counter % 2 == 0){
+            label_turn.setText(txt_username1.getText() + "'s turn.");
+        }else{
+            label_turn.setText(txt_username2.getText() + "'s turn.");
+        }
+    }
+    // a method to determine the winner. 
+    public void winner(){
+        if(button_31.isVisible() == false && button_42.isVisible() == false){
+            if(counter % 2 != 0){
+                label_turn.setText("Game Over!");    
+                JOptionPane.showMessageDialog(null, txt_username1.getText() + " is the winner!");
+                    
+
+            }else{
+                label_turn.setText("Game Over!"); 
+                JOptionPane.showMessageDialog(null, txt_username2.getText() + " is the winner!");
+                
+            }
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,9 +95,9 @@ public class GamePanel extends javax.swing.JFrame {
     private void initComponents() {
 
         txt_chomp = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        label_player1 = new javax.swing.JLabel();
         txt_username1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        label_player2 = new javax.swing.JLabel();
         txt_username2 = new javax.swing.JTextField();
         button_start = new javax.swing.JButton();
         button_11 = new javax.swing.JButton();
@@ -99,22 +128,27 @@ public class GamePanel extends javax.swing.JFrame {
         button_47 = new javax.swing.JButton();
         button_27 = new javax.swing.JButton();
         button_37 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        label_turn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txt_chomp.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txt_chomp.setText("CHOMP!");
-        getContentPane().add(txt_chomp, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 43, 181, 67));
+        getContentPane().add(txt_chomp, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 181, 67));
 
-        jLabel1.setText("Player 1:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 87, 80, 29));
+        label_player1.setText("Player 1:");
+        getContentPane().add(label_player1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 87, 80, 29));
 
+        txt_username1.setText("Username");
         txt_username1.setToolTipText("");
         getContentPane().add(txt_username1, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 87, 116, 29));
 
-        jLabel2.setText("Player 2:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(883, 87, 80, 29));
+        label_player2.setText("Player 2:");
+        getContentPane().add(label_player2, new org.netbeans.lib.awtextra.AbsoluteConstraints(883, 87, 80, 29));
+
+        txt_username2.setText("Username");
         getContentPane().add(txt_username2, new org.netbeans.lib.awtextra.AbsoluteConstraints(968, 87, 116, 29));
 
         button_start.setText("Start Game");
@@ -348,6 +382,10 @@ public class GamePanel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(button_37, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 442, 121, 121));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 160, -1));
+
+        label_turn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(label_turn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 220, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -357,6 +395,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_15.setVisible(false);
         button_16.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_15ActionPerformed
 
     private void button_21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_21ActionPerformed
@@ -375,6 +414,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_11.setVisible(false);
         button_22.setVisible(false);
         button_12.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_21ActionPerformed
 
     private void button_14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_14ActionPerformed
@@ -383,7 +423,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_15.setVisible(false);
         button_16.setVisible(false);
         button_17.setVisible(false);
-        
+        turn();
     }//GEN-LAST:event_button_14ActionPerformed
 
     private void button_45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_45ActionPerformed
@@ -400,6 +440,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_35.setVisible(false);
         button_25.setVisible(false);
         button_15.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_45ActionPerformed
 
     private void button_43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_43ActionPerformed
@@ -424,11 +465,13 @@ public class GamePanel extends javax.swing.JFrame {
         button_33.setVisible(false);
         button_23.setVisible(false);
         button_13.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_43ActionPerformed
 
     private void button_17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_17ActionPerformed
         // TODO add your handling code here:
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_17ActionPerformed
 
     private void button_36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_36ActionPerformed
@@ -439,33 +482,24 @@ public class GamePanel extends javax.swing.JFrame {
         button_27.setVisible(false);
         button_16.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_36ActionPerformed
 
     private void button_16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_16ActionPerformed
         // TODO add your handling code here:
         button_17.setVisible(false);
         button_16.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_16ActionPerformed
 
     private void button_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_startActionPerformed
         // TODO add your handling code here:
-        if(txt_username1.getText() == null){
-            String message = "Player 1 doesn't exist.";
-            JOptionPane.showMessageDialog(null, message, "Dialog",
-            JOptionPane.ERROR_MESSAGE);
-
-        }
-        else if(txt_username2.getText() == null){
-            String message = "Player 2 doesn't exist.";
-            JOptionPane.showMessageDialog(null, message, "Dialog",
-            JOptionPane.ERROR_MESSAGE);
-        }
-        else if(txt_username1.getText() == null && txt_username2.getText() == null){
-            String message = "There are no player.";
-            JOptionPane.showMessageDialog(null, message, "Dialog",
-            JOptionPane.ERROR_MESSAGE);
-
-        }else{
+        
+        if(txt_username1.getText().equalsIgnoreCase("Username") || txt_username2.getText().equalsIgnoreCase("Username")){
+            JOptionPane.showMessageDialog(null, "Please enter a valid username!");
+            }
+        
+        else{
         button_11.setVisible(true);
         button_12.setVisible(true);
         button_13.setVisible(true);
@@ -494,7 +528,11 @@ public class GamePanel extends javax.swing.JFrame {
         button_45.setVisible(true);
         button_46.setVisible(true);
         button_47.setVisible(true);
+        label_turn.setText(txt_username1.getText() + "'s turn.");
+        game = 1; // this number is equal to 1 when the game starts.
+        
         }
+        
     }//GEN-LAST:event_button_startActionPerformed
 
     private void button_13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_13ActionPerformed
@@ -504,6 +542,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_15.setVisible(false);
         button_16.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_13ActionPerformed
 
     private void button_12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_12ActionPerformed
@@ -514,6 +553,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_15.setVisible(false);
         button_16.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_12ActionPerformed
 
     private void button_11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_11ActionPerformed
@@ -525,12 +565,14 @@ public class GamePanel extends javax.swing.JFrame {
         button_15.setVisible(false);
         button_16.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_11ActionPerformed
 
     private void button_27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_27ActionPerformed
         // TODO add your handling code here:
         button_27.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_27ActionPerformed
 
     private void button_26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_26ActionPerformed
@@ -539,7 +581,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_27.setVisible(false);
         button_26.setVisible(false);
         button_16.setVisible(false);
-        
+        turn();
     }//GEN-LAST:event_button_26ActionPerformed
 
     private void button_25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_25ActionPerformed
@@ -550,6 +592,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_15.setVisible(false);
         button_16.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_25ActionPerformed
 
     private void button_24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_24ActionPerformed
@@ -562,6 +605,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_15.setVisible(false);
         button_16.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_24ActionPerformed
 
     private void button_23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_23ActionPerformed
@@ -576,6 +620,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_17.setVisible(false);
         button_23.setVisible(false);
         button_13.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_23ActionPerformed
 
     private void button_22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_22ActionPerformed
@@ -592,6 +637,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_13.setVisible(false);
         button_22.setVisible(false);
         button_12.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_22ActionPerformed
 
     private void button_37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_37ActionPerformed
@@ -599,6 +645,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_37.setVisible(false);
         button_27.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_37ActionPerformed
 
     private void button_35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_35ActionPerformed
@@ -612,6 +659,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_35.setVisible(false);
         button_25.setVisible(false);
         button_15.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_35ActionPerformed
 
     private void button_34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_34ActionPerformed
@@ -628,6 +676,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_34.setVisible(false);
         button_24.setVisible(false);
         button_14.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_34ActionPerformed
 
     private void button_33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_33ActionPerformed
@@ -647,6 +696,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_33.setVisible(false);
         button_23.setVisible(false);
         button_13.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_33ActionPerformed
 
     private void button_32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_32ActionPerformed
@@ -669,7 +719,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_32.setVisible(false);
         button_22.setVisible(false);
         button_12.setVisible(false);
-        
+        turn();
     }//GEN-LAST:event_button_32ActionPerformed
 
     private void button_31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_31ActionPerformed
@@ -695,6 +745,10 @@ public class GamePanel extends javax.swing.JFrame {
         button_31.setVisible(false);
         button_21.setVisible(false);
         button_11.setVisible(false);
+        turn();
+        if(game == 1){
+            winner();
+        }
     }//GEN-LAST:event_button_31ActionPerformed
 
     private void button_47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_47ActionPerformed
@@ -703,6 +757,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_37.setVisible(false);
         button_27.setVisible(false);
         button_17.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_47ActionPerformed
 
     private void button_46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_46ActionPerformed
@@ -715,6 +770,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_36.setVisible(false);
         button_26.setVisible(false);
         button_16.setVisible(false);
+        turn();
     }//GEN-LAST:event_button_46ActionPerformed
 
     private void button_44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_44ActionPerformed
@@ -735,7 +791,7 @@ public class GamePanel extends javax.swing.JFrame {
         button_34.setVisible(false);
         button_24.setVisible(false);
         button_14.setVisible(false);
-        
+        turn();
     }//GEN-LAST:event_button_44ActionPerformed
 
     private void button_42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_42ActionPerformed
@@ -764,6 +820,10 @@ public class GamePanel extends javax.swing.JFrame {
         button_23.setVisible(false);
         button_33.setVisible(false);
         button_43.setVisible(false);
+        turn();
+        if(game == 1){
+            winner();
+        }
     }//GEN-LAST:event_button_42ActionPerformed
 
     private void button_poisonedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_poisonedActionPerformed
@@ -836,8 +896,10 @@ public class GamePanel extends javax.swing.JFrame {
     private javax.swing.JButton button_47;
     private javax.swing.JButton button_poisoned;
     private javax.swing.JButton button_start;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel label_player1;
+    private javax.swing.JLabel label_player2;
+    private javax.swing.JLabel label_turn;
     private javax.swing.JLabel txt_chomp;
     private javax.swing.JTextField txt_username1;
     private javax.swing.JTextField txt_username2;
