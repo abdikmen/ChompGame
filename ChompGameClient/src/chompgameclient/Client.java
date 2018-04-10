@@ -9,7 +9,7 @@ package chompgameclient;
  *
  * @author ArifBurak
  */
-public class ChompGameClient {
+public class Client {
 
     /**
      * @param args the command line arguments
