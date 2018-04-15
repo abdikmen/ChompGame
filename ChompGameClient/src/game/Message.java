@@ -10,5 +10,12 @@ package game;
  * @author ArifBurak
  */
 public class Message {
+    public static enum Message_Type {None, Name, Disconnect,RivalConnected, Text, Selected, Bitis,Start,}
     
+    public Message_Type type;
+    public Object content;
+    public Message(Message_Type t)
+    {
+        this.type=t;
+    }
 }

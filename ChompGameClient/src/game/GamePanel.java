@@ -5,7 +5,9 @@
  */
 package game;
 
-import javax.swing.JFrame;
+
+import chompgameclient.Client;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,47 +20,59 @@ public class GamePanel extends javax.swing.JFrame {
      * Creates new form UserInterface
      */
     
-    //a counter to determine the winner.
+   
+    //kazanani bulmak icin sayac.
     int counter=2;
     
     
-    //an integer to understand that the game has started.
+    //oyunun basladigini anlamak icin degisken.
     int game=0;
+    
+    //framedeki komponentlere erişim için satatik oyun değişkeni
+    public static GamePanel ThisGame;
+    //ekrandaki resim değişimi için timer yerine thread
+    public Thread tmr_slider;
+    //karşı tarafın seçimi seçim -1 deyse seçilmemiş
+    public int RivalSelection = -1;
+    //benim seçimim seçim -1 deyse seçilmemiş
+    public int myselection = -1;
     
     public GamePanel() {
         initComponents();
+        button_00.setVisible(false);
+        button_01.setVisible(false);
+        button_02.setVisible(false);
+        button_03.setVisible(false);
+        button_04.setVisible(false);
+        button_05.setVisible(false);
+        button_06.setVisible(false);
+        button_10.setVisible(false);
         button_11.setVisible(false);
         button_12.setVisible(false);
         button_13.setVisible(false);
         button_14.setVisible(false);
         button_15.setVisible(false);
         button_16.setVisible(false);
-        button_17.setVisible(false);
+        button_20.setVisible(false);
         button_21.setVisible(false);
         button_22.setVisible(false);
         button_23.setVisible(false);
         button_24.setVisible(false);
         button_25.setVisible(false);
         button_26.setVisible(false);
-        button_27.setVisible(false);
+        button_30.setVisible(false);
         button_31.setVisible(false);
         button_32.setVisible(false);
         button_33.setVisible(false);
         button_34.setVisible(false);
         button_35.setVisible(false);
         button_36.setVisible(false);
-        button_37.setVisible(false);
-        button_poisoned.setVisible(false);
-        button_42.setVisible(false);
-        button_43.setVisible(false);
-        button_44.setVisible(false);
-        button_45.setVisible(false);
-        button_46.setVisible(false);
-        button_47.setVisible(false);
         label_turn.setText(null);
         
+        
+        
     }
-    // a method to determine whose turn it is.
+    // turun kimde oldugunu anlamak icin metot.
     public void turn(){
         counter = counter + 1;
         if(counter % 2 == 0){
@@ -67,9 +81,9 @@ public class GamePanel extends javax.swing.JFrame {
             label_turn.setText(txt_username2.getText() + "'s turn.");
         }
     }
-    // a method to determine the winner. 
+    // kazanani bulmak icin bir metot. 
     public void winner(){
-        if(button_31.isVisible() == false && button_42.isVisible() == false){
+        if(button_20.isVisible() == false && button_31.isVisible() == false){
             if(counter % 2 != 0){
                 label_turn.setText("Game Over!");    
                 JOptionPane.showMessageDialog(null, txt_username1.getText() + " is the winner!");
@@ -82,8 +96,32 @@ public class GamePanel extends javax.swing.JFrame {
             }
         }
     }
-    
-    
+    //oyunda degisiklik yapmak icin bir metot.
+    public void tableChange(int x,int y){
+        
+        
+        int[][] matrix = new int[4][7];
+        
+        JButton[][] buttonz = new JButton[][]{
+        {button_00, button_01, button_02, button_03, button_04, button_05, button_06},
+        {button_10, button_11, button_12, button_13, button_14, button_15, button_16},
+        {button_20, button_21, button_22, button_23, button_24, button_25, button_26},
+        {button_30, button_31, button_32, button_33, button_34, button_35, button_36},
+        };
+        
+        int temp = y;
+        
+        for (int i = x; x >=0; x--) {
+            y = temp;
+            for (int j = y; y<= 6; y++) {
+                buttonz[x][y].setVisible(false);
+            }
+            
+        }
+
+        
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,36 +138,37 @@ public class GamePanel extends javax.swing.JFrame {
         label_player2 = new javax.swing.JLabel();
         txt_username2 = new javax.swing.JTextField();
         button_start = new javax.swing.JButton();
-        button_11 = new javax.swing.JButton();
+        button_00 = new javax.swing.JButton();
+        button_01 = new javax.swing.JButton();
+        button_02 = new javax.swing.JButton();
+        button_03 = new javax.swing.JButton();
+        button_04 = new javax.swing.JButton();
+        button_05 = new javax.swing.JButton();
+        button_30 = new javax.swing.JButton();
+        button_10 = new javax.swing.JButton();
         button_12 = new javax.swing.JButton();
         button_13 = new javax.swing.JButton();
         button_14 = new javax.swing.JButton();
         button_15 = new javax.swing.JButton();
-        button_16 = new javax.swing.JButton();
-        button_poisoned = new javax.swing.JButton();
         button_21 = new javax.swing.JButton();
+        button_20 = new javax.swing.JButton();
+        button_31 = new javax.swing.JButton();
         button_23 = new javax.swing.JButton();
+        button_11 = new javax.swing.JButton();
         button_24 = new javax.swing.JButton();
         button_25 = new javax.swing.JButton();
-        button_26 = new javax.swing.JButton();
-        button_32 = new javax.swing.JButton();
-        button_31 = new javax.swing.JButton();
-        button_42 = new javax.swing.JButton();
-        button_34 = new javax.swing.JButton();
         button_22 = new javax.swing.JButton();
-        button_35 = new javax.swing.JButton();
-        button_36 = new javax.swing.JButton();
         button_33 = new javax.swing.JButton();
-        button_44 = new javax.swing.JButton();
-        button_43 = new javax.swing.JButton();
-        button_45 = new javax.swing.JButton();
-        button_46 = new javax.swing.JButton();
-        button_17 = new javax.swing.JButton();
-        button_47 = new javax.swing.JButton();
-        button_27 = new javax.swing.JButton();
-        button_37 = new javax.swing.JButton();
+        button_32 = new javax.swing.JButton();
+        button_34 = new javax.swing.JButton();
+        button_35 = new javax.swing.JButton();
+        button_06 = new javax.swing.JButton();
+        button_36 = new javax.swing.JButton();
+        button_16 = new javax.swing.JButton();
+        button_26 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         label_turn = new javax.swing.JLabel();
+        label_frame = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -159,13 +198,69 @@ public class GamePanel extends javax.swing.JFrame {
         });
         getContentPane().add(button_start, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 710, 247, 58));
 
-        button_11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_11.addActionListener(new java.awt.event.ActionListener() {
+        button_00.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_00.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_11ActionPerformed(evt);
+                button_00ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_11, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 174, 121, 121));
+        getContentPane().add(button_00, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 174, 121, 121));
+
+        button_01.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_01.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_01ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_01, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 174, 121, 121));
+
+        button_02.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_02.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_02ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_02, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 174, 121, 121));
+
+        button_03.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_03.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_03ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_03, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 174, 121, 121));
+
+        button_04.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_04.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_04ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_04, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 174, 121, 121));
+
+        button_05.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_05.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_05ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_05, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 174, 121, 121));
+
+        button_30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece_poisoned.png"))); // NOI18N
+        button_30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_30ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_30, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 576, 121, 121));
+
+        button_10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_10ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_10, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 308, 121, 121));
 
         button_12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_12.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +268,7 @@ public class GamePanel extends javax.swing.JFrame {
                 button_12ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_12, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 174, 121, 121));
+        getContentPane().add(button_12, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 121, 121));
 
         button_13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_13.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +276,7 @@ public class GamePanel extends javax.swing.JFrame {
                 button_13ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_13, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 174, 121, 121));
+        getContentPane().add(button_13, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 308, 121, 121));
 
         button_14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_14.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +284,7 @@ public class GamePanel extends javax.swing.JFrame {
                 button_14ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_14, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 174, 121, 121));
+        getContentPane().add(button_14, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 308, 121, 121));
 
         button_15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_15.addActionListener(new java.awt.event.ActionListener() {
@@ -197,23 +292,7 @@ public class GamePanel extends javax.swing.JFrame {
                 button_15ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_15, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 174, 121, 121));
-
-        button_16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_16ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button_16, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 174, 121, 121));
-
-        button_poisoned.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece_poisoned.png"))); // NOI18N
-        button_poisoned.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_poisonedActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button_poisoned, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 576, 121, 121));
+        getContentPane().add(button_15, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 308, 121, 121));
 
         button_21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_21.addActionListener(new java.awt.event.ActionListener() {
@@ -221,47 +300,15 @@ public class GamePanel extends javax.swing.JFrame {
                 button_21ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_21, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 308, 121, 121));
+        getContentPane().add(button_21, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 442, 121, 121));
 
-        button_23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_23.addActionListener(new java.awt.event.ActionListener() {
+        button_20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_23ActionPerformed(evt);
+                button_20ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_23, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 308, 121, 121));
-
-        button_24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_24.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_24ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button_24, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 308, 121, 121));
-
-        button_25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_25.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_25ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button_25, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 308, 121, 121));
-
-        button_26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_26.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_26ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button_26, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 308, 121, 121));
-
-        button_32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_32.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_32ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button_32, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 442, 121, 121));
+        getContentPane().add(button_20, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 442, 121, 121));
 
         button_31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_31.addActionListener(new java.awt.event.ActionListener() {
@@ -269,23 +316,39 @@ public class GamePanel extends javax.swing.JFrame {
                 button_31ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_31, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 442, 121, 121));
+        getContentPane().add(button_31, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 576, 121, 121));
 
-        button_42.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_42.addActionListener(new java.awt.event.ActionListener() {
+        button_23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_23.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_42ActionPerformed(evt);
+                button_23ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_42, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 576, 121, 121));
+        getContentPane().add(button_23, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 442, 121, 121));
 
-        button_34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_34.addActionListener(new java.awt.event.ActionListener() {
+        button_11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_34ActionPerformed(evt);
+                button_11ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_34, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 442, 121, 121));
+        getContentPane().add(button_11, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 308, 121, 121));
+
+        button_24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_24ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_24, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 442, 121, 121));
+
+        button_25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_25ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_25, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 442, 121, 121));
 
         button_22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_22.addActionListener(new java.awt.event.ActionListener() {
@@ -293,23 +356,7 @@ public class GamePanel extends javax.swing.JFrame {
                 button_22ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_22, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 308, 121, 121));
-
-        button_35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_35.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_35ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button_35, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 442, 121, 121));
-
-        button_36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_36.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_36ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button_36, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 442, 121, 121));
+        getContentPane().add(button_22, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 442, 121, 121));
 
         button_33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
         button_33.addActionListener(new java.awt.event.ActionListener() {
@@ -317,518 +364,290 @@ public class GamePanel extends javax.swing.JFrame {
                 button_33ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_33, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 442, 121, 121));
+        getContentPane().add(button_33, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 576, 121, 121));
 
-        button_44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_44.addActionListener(new java.awt.event.ActionListener() {
+        button_32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_32.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_44ActionPerformed(evt);
+                button_32ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_44, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 576, 121, 121));
+        getContentPane().add(button_32, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 576, 121, 121));
 
-        button_43.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_43.addActionListener(new java.awt.event.ActionListener() {
+        button_34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_43ActionPerformed(evt);
+                button_34ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_43, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 576, 121, 121));
+        getContentPane().add(button_34, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 576, 121, 121));
 
-        button_45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_45.addActionListener(new java.awt.event.ActionListener() {
+        button_35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_35.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_45ActionPerformed(evt);
+                button_35ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_45, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 576, 121, 121));
+        getContentPane().add(button_35, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 576, 121, 121));
 
-        button_46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_46.addActionListener(new java.awt.event.ActionListener() {
+        button_06.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_06.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_46ActionPerformed(evt);
+                button_06ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_46, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 576, 121, 121));
+        getContentPane().add(button_06, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 174, 121, 121));
 
-        button_17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_17.addActionListener(new java.awt.event.ActionListener() {
+        button_36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_36.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_17ActionPerformed(evt);
+                button_36ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_17, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 174, 121, 121));
+        getContentPane().add(button_36, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 576, 121, 121));
 
-        button_47.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_47.addActionListener(new java.awt.event.ActionListener() {
+        button_16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_47ActionPerformed(evt);
+                button_16ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_47, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 576, 121, 121));
+        getContentPane().add(button_16, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 308, 121, 121));
 
-        button_27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_27.addActionListener(new java.awt.event.ActionListener() {
+        button_26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
+        button_26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_27ActionPerformed(evt);
+                button_26ActionPerformed(evt);
             }
         });
-        getContentPane().add(button_27, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 308, 121, 121));
-
-        button_37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chocolate_piece.png"))); // NOI18N
-        button_37.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_37ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(button_37, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 442, 121, 121));
+        getContentPane().add(button_26, new org.netbeans.lib.awtextra.AbsoluteConstraints(856, 442, 121, 121));
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 160, -1));
 
         label_turn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         getContentPane().add(label_turn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, 220, 30));
 
+        label_frame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dcd9cd-2048x1536.png"))); // NOI18N
+        label_frame.setText("jLabel1");
+        label_frame.setMaximumSize(new java.awt.Dimension(1084, 768));
+        getContentPane().add(label_frame, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 820));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void button_15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_15ActionPerformed
+    private void button_04ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_04ActionPerformed
         // TODO add your handling code here:
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
+        tableChange(0,4);
         turn();
-    }//GEN-LAST:event_button_15ActionPerformed
+    }//GEN-LAST:event_button_04ActionPerformed
 
-    private void button_21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_21ActionPerformed
+    private void button_10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_10ActionPerformed
         // TODO add your handling code here:
-        button_24.setVisible(false);
-        button_25.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_14.setVisible(false);
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
-        button_23.setVisible(false);
-        button_13.setVisible(false);
-        button_21.setVisible(false);
-        button_11.setVisible(false);
-        button_22.setVisible(false);
-        button_12.setVisible(false);
+        tableChange(1, 0);
         turn();
-    }//GEN-LAST:event_button_21ActionPerformed
+    }//GEN-LAST:event_button_10ActionPerformed
 
-    private void button_14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_14ActionPerformed
+    private void button_03ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_03ActionPerformed
         // TODO add your handling code here:
-        button_14.setVisible(false);
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
+        tableChange(0, 3);
         turn();
-    }//GEN-LAST:event_button_14ActionPerformed
+    }//GEN-LAST:event_button_03ActionPerformed
 
-    private void button_45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_45ActionPerformed
+    private void button_34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_34ActionPerformed
         // TODO add your handling code here:
-        button_47.setVisible(false);
-        button_37.setVisible(false);
-        button_27.setVisible(false);
-        button_17.setVisible(false);
-        button_46.setVisible(false);
-        button_36.setVisible(false);
-        button_26.setVisible(false);
-        button_16.setVisible(false);
-        button_45.setVisible(false);
-        button_35.setVisible(false);
-        button_25.setVisible(false);
-        button_15.setVisible(false);
+        tableChange(3, 4);
         turn();
-    }//GEN-LAST:event_button_45ActionPerformed
+    }//GEN-LAST:event_button_34ActionPerformed
 
-    private void button_43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_43ActionPerformed
+    private void button_32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_32ActionPerformed
         // TODO add your handling code here:
-        button_47.setVisible(false);
-        button_37.setVisible(false);
-        button_27.setVisible(false);
-        button_17.setVisible(false);
-        button_46.setVisible(false);
-        button_36.setVisible(false);
-        button_26.setVisible(false);
-        button_16.setVisible(false);
-        button_45.setVisible(false);
-        button_35.setVisible(false);
-        button_25.setVisible(false);
-        button_15.setVisible(false);
-        button_44.setVisible(false);
-        button_34.setVisible(false);
-        button_24.setVisible(false);
-        button_14.setVisible(false);
-        button_43.setVisible(false);
-        button_33.setVisible(false);
-        button_23.setVisible(false);
-        button_13.setVisible(false);
+        tableChange(3, 2);
         turn();
-    }//GEN-LAST:event_button_43ActionPerformed
+    }//GEN-LAST:event_button_32ActionPerformed
 
-    private void button_17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_17ActionPerformed
+    private void button_06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_06ActionPerformed
         // TODO add your handling code here:
-        button_17.setVisible(false);
+        tableChange(0, 6);
         turn();
-    }//GEN-LAST:event_button_17ActionPerformed
+    }//GEN-LAST:event_button_06ActionPerformed
 
-    private void button_36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_36ActionPerformed
+    private void button_25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_25ActionPerformed
         // TODO add your handling code here:
-        button_36.setVisible(false);
-        button_37.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
+        tableChange(2, 5);
         turn();
-    }//GEN-LAST:event_button_36ActionPerformed
+    }//GEN-LAST:event_button_25ActionPerformed
 
-    private void button_16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_16ActionPerformed
+    private void button_05ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_05ActionPerformed
         // TODO add your handling code here:
-        button_17.setVisible(false);
-        button_16.setVisible(false);
+        tableChange(0, 5);
         turn();
-    }//GEN-LAST:event_button_16ActionPerformed
+    }//GEN-LAST:event_button_05ActionPerformed
 
     private void button_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_startActionPerformed
         // TODO add your handling code here:
-        
+        //username disinda bir sey girilmedigi durumda hata mesaji verir.
         if(txt_username1.getText().equalsIgnoreCase("Username") || txt_username2.getText().equalsIgnoreCase("Username")){
             JOptionPane.showMessageDialog(null, "Please enter a valid username!");
             }
         
         else{
+        button_00.setVisible(true);
+        button_01.setVisible(true);
+        button_02.setVisible(true);
+        button_03.setVisible(true);
+        button_04.setVisible(true);
+        button_05.setVisible(true);
+        button_06.setVisible(true);
+        button_10.setVisible(true);
         button_11.setVisible(true);
         button_12.setVisible(true);
         button_13.setVisible(true);
         button_14.setVisible(true);
         button_15.setVisible(true);
         button_16.setVisible(true);
-        button_17.setVisible(true);
+        button_20.setVisible(true);
         button_21.setVisible(true);
         button_22.setVisible(true);
         button_23.setVisible(true);
         button_24.setVisible(true);
         button_25.setVisible(true);
         button_26.setVisible(true);
-        button_27.setVisible(true);
+        button_30.setVisible(true);
         button_31.setVisible(true);
         button_32.setVisible(true);
         button_33.setVisible(true);
         button_34.setVisible(true);
         button_35.setVisible(true);
         button_36.setVisible(true);
-        button_37.setVisible(true);
-        button_poisoned.setVisible(true);
-        button_42.setVisible(true);
-        button_43.setVisible(true);
-        button_44.setVisible(true);
-        button_45.setVisible(true);
-        button_46.setVisible(true);
-        button_47.setVisible(true);
         label_turn.setText(txt_username1.getText() + "'s turn.");
-        game = 1; // this number is equal to 1 when the game starts.
-        
+        game = 1; // oyun basladiginda bir yapilir.
+        Client.Start("127.0.0.1", 2000);
         }
         
     }//GEN-LAST:event_button_startActionPerformed
 
+    private void button_02ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_02ActionPerformed
+        // TODO add your handling code here:
+        tableChange(0, 2);
+        turn();
+    }//GEN-LAST:event_button_02ActionPerformed
+
+    private void button_01ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_01ActionPerformed
+        // TODO add your handling code here:
+        tableChange(0, 1);
+        turn();
+    }//GEN-LAST:event_button_01ActionPerformed
+
+    private void button_00ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_00ActionPerformed
+        // TODO add your handling code here:
+        tableChange(0, 0);
+        turn();
+    }//GEN-LAST:event_button_00ActionPerformed
+
+    private void button_16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_16ActionPerformed
+        // TODO add your handling code here:
+        tableChange(1, 6);
+        turn();
+    }//GEN-LAST:event_button_16ActionPerformed
+
+    private void button_15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_15ActionPerformed
+        // TODO add your handling code here:
+        tableChange(1, 5);
+        turn();
+    }//GEN-LAST:event_button_15ActionPerformed
+
+    private void button_14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_14ActionPerformed
+        // TODO add your handling code here:
+        tableChange(1, 4);
+        turn();
+    }//GEN-LAST:event_button_14ActionPerformed
+
     private void button_13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_13ActionPerformed
         // TODO add your handling code here:
-        button_13.setVisible(false);
-        button_14.setVisible(false);
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
+        tableChange(1, 3);
         turn();
     }//GEN-LAST:event_button_13ActionPerformed
 
     private void button_12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_12ActionPerformed
         // TODO add your handling code here:
-        button_12.setVisible(false);
-        button_13.setVisible(false);
-        button_14.setVisible(false);
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
+        tableChange(1, 2);
         turn();
     }//GEN-LAST:event_button_12ActionPerformed
 
     private void button_11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_11ActionPerformed
         // TODO add your handling code here:
-        button_11.setVisible(false);
-        button_12.setVisible(false);
-        button_13.setVisible(false);
-        button_14.setVisible(false);
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
+        tableChange(1, 1);
         turn();
     }//GEN-LAST:event_button_11ActionPerformed
 
-    private void button_27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_27ActionPerformed
-        // TODO add your handling code here:
-        button_27.setVisible(false);
-        button_17.setVisible(false);
-        turn();
-    }//GEN-LAST:event_button_27ActionPerformed
-
     private void button_26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_26ActionPerformed
         // TODO add your handling code here:
-        button_17.setVisible(false);
-        button_27.setVisible(false);
-        button_26.setVisible(false);
-        button_16.setVisible(false);
+        tableChange(2, 6);
         turn();
     }//GEN-LAST:event_button_26ActionPerformed
 
-    private void button_25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_25ActionPerformed
-        // TODO add your handling code here:
-        button_25.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
-        turn();
-    }//GEN-LAST:event_button_25ActionPerformed
-
     private void button_24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_24ActionPerformed
         // TODO add your handling code here:
-        button_24.setVisible(false);
-        button_25.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_14.setVisible(false);
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
+        tableChange(2, 4);
         turn();
     }//GEN-LAST:event_button_24ActionPerformed
 
     private void button_23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_23ActionPerformed
         // TODO add your handling code here:
-        button_24.setVisible(false);
-        button_25.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_14.setVisible(false);
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
-        button_23.setVisible(false);
-        button_13.setVisible(false);
+        tableChange(2, 3);
         turn();
     }//GEN-LAST:event_button_23ActionPerformed
 
     private void button_22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_22ActionPerformed
         // TODO add your handling code here:
-        button_24.setVisible(false);
-        button_25.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_14.setVisible(false);
-        button_15.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
-        button_23.setVisible(false);
-        button_13.setVisible(false);
-        button_22.setVisible(false);
-        button_12.setVisible(false);
+        tableChange(2, 2);
         turn();
     }//GEN-LAST:event_button_22ActionPerformed
 
-    private void button_37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_37ActionPerformed
+    private void button_21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_21ActionPerformed
         // TODO add your handling code here:
-        button_37.setVisible(false);
-        button_27.setVisible(false);
-        button_17.setVisible(false);
+        tableChange(2, 1);
         turn();
-    }//GEN-LAST:event_button_37ActionPerformed
+    }//GEN-LAST:event_button_21ActionPerformed
+
+    private void button_20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_20ActionPerformed
+        // TODO add your handling code here:
+        tableChange(2, 0);
+        turn();
+        if(game == 1){
+            winner();
+        }
+    }//GEN-LAST:event_button_20ActionPerformed
+
+    private void button_36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_36ActionPerformed
+        // TODO add your handling code here:
+        tableChange(3, 6);
+        turn();
+    }//GEN-LAST:event_button_36ActionPerformed
 
     private void button_35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_35ActionPerformed
         // TODO add your handling code here:
-        button_36.setVisible(false);
-        button_37.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
-        button_35.setVisible(false);
-        button_25.setVisible(false);
-        button_15.setVisible(false);
+        tableChange(3, 5);
         turn();
     }//GEN-LAST:event_button_35ActionPerformed
 
-    private void button_34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_34ActionPerformed
-        // TODO add your handling code here:
-        button_36.setVisible(false);
-        button_37.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
-        button_35.setVisible(false);
-        button_25.setVisible(false);
-        button_15.setVisible(false);
-        button_34.setVisible(false);
-        button_24.setVisible(false);
-        button_14.setVisible(false);
-        turn();
-    }//GEN-LAST:event_button_34ActionPerformed
-
     private void button_33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_33ActionPerformed
         // TODO add your handling code here:
-        button_36.setVisible(false);
-        button_37.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
-        button_35.setVisible(false);
-        button_25.setVisible(false);
-        button_15.setVisible(false);
-        button_34.setVisible(false);
-        button_24.setVisible(false);
-        button_14.setVisible(false);
-        button_33.setVisible(false);
-        button_23.setVisible(false);
-        button_13.setVisible(false);
+        tableChange(3, 3);
         turn();
     }//GEN-LAST:event_button_33ActionPerformed
 
-    private void button_32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_32ActionPerformed
-        // TODO add your handling code here:
-        button_36.setVisible(false);
-        button_37.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
-        button_35.setVisible(false);
-        button_25.setVisible(false);
-        button_15.setVisible(false);
-        button_34.setVisible(false);
-        button_24.setVisible(false);
-        button_14.setVisible(false);
-        button_33.setVisible(false);
-        button_23.setVisible(false);
-        button_13.setVisible(false);
-        button_32.setVisible(false);
-        button_22.setVisible(false);
-        button_12.setVisible(false);
-        turn();
-    }//GEN-LAST:event_button_32ActionPerformed
-
     private void button_31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_31ActionPerformed
         // TODO add your handling code here:
-        button_36.setVisible(false);
-        button_37.setVisible(false);
-        button_26.setVisible(false);
-        button_27.setVisible(false);
-        button_16.setVisible(false);
-        button_17.setVisible(false);
-        button_35.setVisible(false);
-        button_25.setVisible(false);
-        button_15.setVisible(false);
-        button_34.setVisible(false);
-        button_24.setVisible(false);
-        button_14.setVisible(false);
-        button_33.setVisible(false);
-        button_23.setVisible(false);
-        button_13.setVisible(false);
-        button_32.setVisible(false);
-        button_22.setVisible(false);
-        button_12.setVisible(false);
-        button_31.setVisible(false);
-        button_21.setVisible(false);
-        button_11.setVisible(false);
+        tableChange(3, 1);
         turn();
         if(game == 1){
             winner();
         }
     }//GEN-LAST:event_button_31ActionPerformed
 
-    private void button_47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_47ActionPerformed
+    private void button_30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_30ActionPerformed
         // TODO add your handling code here:
-        button_47.setVisible(false);
-        button_37.setVisible(false);
-        button_27.setVisible(false);
-        button_17.setVisible(false);
-        turn();
-    }//GEN-LAST:event_button_47ActionPerformed
-
-    private void button_46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_46ActionPerformed
-        // TODO add your handling code here:
-        button_47.setVisible(false);
-        button_37.setVisible(false);
-        button_27.setVisible(false);
-        button_17.setVisible(false);
-        button_46.setVisible(false);
-        button_36.setVisible(false);
-        button_26.setVisible(false);
-        button_16.setVisible(false);
-        turn();
-    }//GEN-LAST:event_button_46ActionPerformed
-
-    private void button_44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_44ActionPerformed
-        // TODO add your handling code here:
-        button_47.setVisible(false);
-        button_37.setVisible(false);
-        button_27.setVisible(false);
-        button_17.setVisible(false);
-        button_46.setVisible(false);
-        button_36.setVisible(false);
-        button_26.setVisible(false);
-        button_16.setVisible(false);
-        button_45.setVisible(false);
-        button_35.setVisible(false);
-        button_25.setVisible(false);
-        button_15.setVisible(false);
-        button_44.setVisible(false);
-        button_34.setVisible(false);
-        button_24.setVisible(false);
-        button_14.setVisible(false);
-        turn();
-    }//GEN-LAST:event_button_44ActionPerformed
-
-    private void button_42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_42ActionPerformed
-        // TODO add your handling code here:
-        button_47.setVisible(false);
-        button_37.setVisible(false);
-        button_27.setVisible(false);
-        button_17.setVisible(false);
-        button_46.setVisible(false);
-        button_36.setVisible(false);
-        button_26.setVisible(false);
-        button_16.setVisible(false);
-        button_45.setVisible(false);
-        button_35.setVisible(false);
-        button_25.setVisible(false);
-        button_15.setVisible(false);
-        button_44.setVisible(false);
-        button_34.setVisible(false);
-        button_24.setVisible(false);
-        button_14.setVisible(false);
-        button_42.setVisible(false);
-        button_32.setVisible(false);
-        button_22.setVisible(false);
-        button_12.setVisible(false);
-        button_13.setVisible(false);
-        button_23.setVisible(false);
-        button_33.setVisible(false);
-        button_43.setVisible(false);
-        turn();
-        if(game == 1){
-            winner();
-        }
-    }//GEN-LAST:event_button_42ActionPerformed
-
-    private void button_poisonedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_poisonedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button_poisonedActionPerformed
+    }//GEN-LAST:event_button_30ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -858,8 +677,9 @@ public class GamePanel extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and sdisplay the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new GamePanel().setVisible(true);
             }
@@ -867,41 +687,42 @@ public class GamePanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_00;
+    private javax.swing.JButton button_01;
+    private javax.swing.JButton button_02;
+    private javax.swing.JButton button_03;
+    private javax.swing.JButton button_04;
+    private javax.swing.JButton button_05;
+    private javax.swing.JButton button_06;
+    private javax.swing.JButton button_10;
     private javax.swing.JButton button_11;
     private javax.swing.JButton button_12;
     private javax.swing.JButton button_13;
     private javax.swing.JButton button_14;
     private javax.swing.JButton button_15;
     private javax.swing.JButton button_16;
-    private javax.swing.JButton button_17;
+    private javax.swing.JButton button_20;
     private javax.swing.JButton button_21;
     private javax.swing.JButton button_22;
     private javax.swing.JButton button_23;
     private javax.swing.JButton button_24;
     private javax.swing.JButton button_25;
     private javax.swing.JButton button_26;
-    private javax.swing.JButton button_27;
+    private javax.swing.JButton button_30;
     private javax.swing.JButton button_31;
     private javax.swing.JButton button_32;
     private javax.swing.JButton button_33;
     private javax.swing.JButton button_34;
     private javax.swing.JButton button_35;
     private javax.swing.JButton button_36;
-    private javax.swing.JButton button_37;
-    private javax.swing.JButton button_42;
-    private javax.swing.JButton button_43;
-    private javax.swing.JButton button_44;
-    private javax.swing.JButton button_45;
-    private javax.swing.JButton button_46;
-    private javax.swing.JButton button_47;
-    private javax.swing.JButton button_poisoned;
-    private javax.swing.JButton button_start;
+    public javax.swing.JButton button_start;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel label_frame;
     private javax.swing.JLabel label_player1;
     private javax.swing.JLabel label_player2;
     private javax.swing.JLabel label_turn;
     private javax.swing.JLabel txt_chomp;
-    private javax.swing.JTextField txt_username1;
-    private javax.swing.JTextField txt_username2;
+    public javax.swing.JTextField txt_username1;
+    public javax.swing.JTextField txt_username2;
     // End of variables declaration//GEN-END:variables
 }
